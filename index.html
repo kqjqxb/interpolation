@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерполяція123</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+</head>
+<body>
+<div class="container mt-4">
+    <div class="form-group">
+        <label for="pointInputMethod">Виберіть метод введення точок: </label>
+        <select id="pointInputMethod" class="form-control" onchange="ui.toggleInputMethod()">
+            <option value="manual">Ввести точки</option>
+            <option value="file">Точки із файлу</option>
+        </select>
+    </div>
+    <div id="manualInput" class="mt-3">
+        <div class="form-group">
+            <label for="numPoints">Кількість точок (2-15): </label>
+            <input type="number" id="numPoints" class="form-control" min="2" max="15">
+        </div>
+        <button class="btn btn-primary" onclick="ui.createFields()">Створити поля</button>
+        <button class="btn btn-secondary" onclick="awp.generatePoints()">Згенерувати точки</button>
+        <form id="pointsForm" class="mt-3">
+            <!-- Динамічні поля для координат точок -->
+        </form>
+        <button class="btn btn-info mt-3" onclick="awp.addPoint()">Додати точку</button>
+    </div>
+    <div id="fileInputDiv" class="mt-3" style="display: none;">
+        <div class="form-group">
+            <label for="fileInput">Зчитати точки з файлу: </label>
+            <input type="file" id="fileInput" class="form-control-file" accept=".txt" onchange="awp.readFile(this)">
+        </div>
+    </div>
+    <div class="mt-3">
+        <div class="form-group">
+            <label for="method">Спосіб розв'язання: </label>
+            <select id="method" class="form-control">
+                <option value="linear">Лінійна інтерполяція</option>
+                <option value="newton">Інтерполяція методом Ньютона</option>
+            </select>
+        </div>
+        <button class="btn btn-success" type="button" onclick="interp.interpolate()">Інтерполювати</button>
+    </div>
+    <div class="mt-3">
+        <button id="saveBtn" class="btn btn-warning" onclick="awc.saveChart()">Зберегти графік</button>
+        <button id="resetBtn" class="btn btn-danger" onclick="ui.resetAll()">Скинути</button>
+    </div>
+    <canvas id="interpolationChart" class="mt-4"></canvas>
+    <div id="complexityDisplay" class="mt-3"></div>
+    <div id="polynomialDisplay" class="mt-3"></div>
+    <div id="complexity" class="mt-3"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
